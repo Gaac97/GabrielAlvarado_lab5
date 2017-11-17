@@ -69,6 +69,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_equipos = new javax.swing.JList();
+        jButton5 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_jugadores = new javax.swing.JList();
@@ -231,21 +233,42 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jl_equipos);
 
+        jButton5.setText("Cargar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("Listar Equipos");
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(301, 301, 301)
+                        .addComponent(jButton5))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(jLabel27)))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Equipos", jPanel13);
@@ -521,15 +544,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_equiposValueChanged
 
     private void jl_jugadoresValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jl_jugadoresValueChanged
-        // TODO add your handling code here:
+    pos2 = jl_jugadores.getSelectedIndex();
+    jl_jugadores.remove(pos2);
+    DefaultListModel model = (DefaultListModel)jl_jugadores.getModel();
+        for (Jugador t : ListJugador) {
+            model.addElement(t);
+        }
+       jl_jugadores.setModel(model);
     }//GEN-LAST:event_jl_jugadoresValueChanged
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-     DefaultListModel model = (DefaultListModel)jl_equipos.getModel();
-        for (Jugador L : ListJugador) {
-       model.addElement(L);
+      pos = jl_jugadores.getSelectedIndex();
+    jl_jugadores.remove(pos2);
+    DefaultListModel model = (DefaultListModel)jl_jugadores.getModel();
+        for (Jugador t : ListJugador) {
+            model.addElement(t);
         }
-        jl_jugadores.setModel(model);
+       jl_jugadores.setModel(model);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
@@ -544,7 +575,7 @@ public class Principal extends javax.swing.JFrame {
         String posicion = cb_posicion1.getSelectedItem().toString();
         String habilidad = tf_habilidad1.getText();
         String tecnica = tf_tecnica1.getText();
-        int resistencia = Integer.parseInt(tf_tecnica1.getText());
+        int resistencia = Integer.parseInt(tf_resistencia.getText());
         boolean disponible = false;
         boolean comprado;
         if (rb_d.isSelected()) {
@@ -553,7 +584,7 @@ public class Principal extends javax.swing.JFrame {
         if (rd_c.isSelected()) {
             disponible = false;
         }
-        ListJugador.get(pos).setDisponibilidad(disponible);
+        ListJugador.get(pos2).setDisponibilidad(disponible);
         ListJugador.get(pos2).setHabilidad(habilidad);
         ListJugador.get(pos2).setNombre(nombre);
         ListJugador.get(pos2).setPrecio(precio);
@@ -580,6 +611,16 @@ public class Principal extends javax.swing.JFrame {
         ListEquipo.get(pos).setCopas(copas);
         ListEquipo.get(pos).setPresupuesto(presupuesto);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+     pos2 = jl_jugadores.getSelectedIndex();
+    jl_jugadores.remove(pos2);
+    DefaultListModel model = (DefaultListModel)jl_equipos.getModel();
+        for (Equipo t : ListEquipo) {
+            model.addElement(t);
+        }
+       jl_jugadores.setModel(model);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -623,6 +664,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
@@ -644,6 +686,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -697,4 +740,6 @@ ArrayList<Jugador> ListJugador = new ArrayList();
     ArrayList<Equipo> ListEquipo = new ArrayList();
 int pos;
 int pos2;
+
+
 }
