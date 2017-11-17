@@ -24,7 +24,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
-
+        DefaultListModel model = (DefaultListModel) jl_equipos2.getModel();
     }
 
     /**
@@ -123,6 +123,7 @@ public class Principal extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jl_equipos2 = new javax.swing.JList();
+        jButton11 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -136,6 +137,12 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -247,6 +254,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jl_equipos);
 
         jButton5.setText("Cargar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel27.setText("Listar Equipos");
 
@@ -536,11 +548,21 @@ public class Principal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 170, 100));
+        jPanel11.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 170, 100));
 
+        jl_equipos2.setModel(new DefaultListModel()
+        );
         jScrollPane4.setViewportView(jl_equipos2);
 
-        jPanel11.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, 330));
+        jPanel11.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 220, 310));
+
+        jButton11.setText("jButton11");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 150, 80));
 
         jTabbedPane1.addTab("Arbol", jPanel11);
 
@@ -572,6 +594,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultListModel model = (DefaultListModel) jl_equipos.getModel();
         model.addElement(e);
         jl_equipos.setModel(model);
+        jl_equipos2.setModel(model);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -696,8 +719,8 @@ public class Principal extends javax.swing.JFrame {
             }
             //obtener la persona a guardar
             DefaultListModel lista = (DefaultListModel) jl_equipos2.getModel();
+            Jugador t = (Jugador) lista.get(jl_equipos2.getSelectedIndex());
 
-           
             //ver si ya existe la nacionalidad
             int centinela = -1;
 
@@ -728,6 +751,39 @@ public class Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+
+
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+     DefaultTreeModel m = (DefaultTreeModel) jt_equipos.getModel();
+     String nombre = tf_nombre.getText();
+        int presupuesto = Integer.parseInt(tf_presupuesto.getText());
+        int copas = Integer.parseInt(tf_numero.getText());
+        String estadio = tf_estadio.getText();
+        Equipo e = new Equipo(nombre, copas, estadio, presupuesto);
+        ListEquipo.add(e);
+        DefaultListModel model = (DefaultListModel) jl_equipos.getModel();
+        model.addElement(e);
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode nodo;
+        nodo = new DefaultMutableTreeNode(new Equipo(nombre, copas, estadio, presupuesto));
+
+        DefaultMutableTreeNode jugador;
+        jugador= new DefaultMutableTreeNode(new Jugador());
+       
+        raiz.add(nodo);
+        jugador.add(raiz);
+        
+
+        m.reload();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -769,6 +825,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox cb_posicion1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
