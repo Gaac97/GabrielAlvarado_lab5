@@ -90,8 +90,10 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", precio=" + precio + ", posicion=" + posicion + ", disponibilidad=" + disponibilidad + ", habilidad=" + habilidad + ", tecnica=" + tecnica + ", resistencia=" + resistencia + '}';
+        return "Jugador{" + "nombre=" + nombre + ", precio=" + precio + ", posicion=" + posicion + ", disponibilidad=" + disponibilidad + '}';
     }
+
+    
    
     
 }
